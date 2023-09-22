@@ -1,0 +1,94 @@
+
+
+
+{% include 'admin/cabecera.html' %}
+<br/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+    <div class="card-header">
+        Datos del Juego
+    </div>
+    <div class="card-body">
+    
+        <form action="/admin/juegosa/guardar" method="post" enctype="multipart/form-data"> 
+            
+        
+
+            <div class="mb-3">
+              <label for="txtNombre" class="form-label">Nombre:</label>
+              <input type="text" class="form-control" name="txtNombre" id="txtNombre" aria-describedby="helpId" placeholder="Escriba el nombre del juego">
+            </div>
+
+            <div class="mb-3">
+              <label for="txtImagen" class="form-label">Imagen:</label>
+              <input type="file" class="form-control" name="txtImagen" id="txtImagen" aria-describedby="helpId" placeholder="Seleccione la imagen">
+            </div>
+            
+            <div class="mb-3">
+              <label for="txtURL" class="form-label">URL Descarga:</label>
+              <input type="text" class="form-control" name="txtURL" id="txtURL" aria-describedby="helpId" placeholder="Escriba la URL de Descarga">
+            </div>
+
+            
+            <button type="submit" class="btn btn-primary">Agregar</button>
+
+        </form>
+    
+     
+    </div> 
+
+    <div class="card-footer text-muted">
+        Escrito por ruben
+    </div>
+ </div>
+        </div>
+        <div class="col-md-7">
+            
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Imagen</th>
+                            <th>URL</th>
+                            <th>Acciones</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for juegosa in juegosa %}
+                        <tr>
+                            <td>{{ juegosa[0] }}</td>
+                            <td>{{ juegosa[1] }}</td>
+                            <td>
+                                <img width="60" src="/img/{{ juegosa[2] }}" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
+                                {{ juegosa[2] }}
+                            </td>
+                            <td>{{ juegosa[3] }}</td>
+                            <td>
+                                <form action="/admin/juegosa/borrar" method="post">
+                                <input value="{{ juegosa[0] }}" type="text" name="txtID" id="txtID">
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+
+                                </form>    
+                            
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            
+            
+
+
+        </div>
+        
+    </div>
+</div>
+
+{% include 'admin/pie.html' %}
+
+ 
